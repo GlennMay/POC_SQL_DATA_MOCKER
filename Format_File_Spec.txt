@@ -1,0 +1,15 @@
+The format file shall contain sql like column definitions starting on line 1.
+
+Initially only varchar and int data types will be supported.
+
+<Column Definition> ::= 
+column_name { varchar(<param value>) | int}
+		[ NULL | NOT NULL ]
+		[ default "<string>" | default <value> ]
+	
+<param value> ::= { [0-9] | max }
+
+<string> ::= { [A-Z,a-z].*[0-9,A-Z,a-z,_].* }
+
+<value> ::= { [0-9].* }
+
