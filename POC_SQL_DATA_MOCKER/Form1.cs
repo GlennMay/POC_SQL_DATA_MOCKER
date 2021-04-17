@@ -21,32 +21,41 @@ namespace POC_SQL_DATA_MOCKER
         private bool Interface_Inputs_Are_Valid()
         {
             bool AllValid = true;
-            
+            Color ErrorColor = Color.Red;
+
             if (!FormatFilePathIsValid())
             {
                 AllValid = false;
-                
-                return AllValid;
+                richTextBox1.SelectionColor= ErrorColor;
+                richTextBox1.AppendText("Format file path is invalid.\r\n");
+                // richTextBox1.ForeColor = curColor;
             }
 
             if (!OutputFileNameIsValid())
             {
                 AllValid = false;
-                return AllValid;
+                richTextBox1.SelectionColor = ErrorColor;
+                richTextBox1.AppendText("Output file name is invalid.\r\n");
+                
             }
 
             if (!RowsToOutputIsValid())
             {
                 AllValid = false;
-                return AllValid;
+                richTextBox1.SelectionColor = ErrorColor;
+                richTextBox1.AppendText("Rows to output is invalid.\r\n");
+                
             }
 
             if (!DelimiterIsValid())
             {
                 AllValid = false;
-                return AllValid;
+                richTextBox1.SelectionColor = ErrorColor;
+                richTextBox1.AppendText("Delimiter is invalid.\r\n");
+                
             }
 
+            richTextBox1.AppendText("\r\n");
             return AllValid;
         }
 
@@ -54,7 +63,7 @@ namespace POC_SQL_DATA_MOCKER
         {
             bool isValid = false;
 
-            if (textBox_FormatFilePath.ToString().Trim().Length>0)
+            if (textBox_FormatFilePath.Text.ToString().Trim().Length>0)
             {
                 if (File.Exists(textBox_FormatFilePath.ToString()))
                 {
@@ -69,7 +78,7 @@ namespace POC_SQL_DATA_MOCKER
         {
             bool isValid = false;
 
-            if (textBox_OutFileName.ToString().Trim().Length>0)
+            if (textBox_OutFileName.Text.ToString().Trim().Length>0)
             {
                 isValid = true;
             }
@@ -81,7 +90,7 @@ namespace POC_SQL_DATA_MOCKER
             bool isValid = false;
             long rowCount = 0;
                                  
-            isValid = long.TryParse(textBox_RowsOut.ToString(), out rowCount);
+            isValid = long.TryParse(textBox_RowsOut.Text.ToString(), out rowCount);
 
             return isValid;
         }
@@ -90,7 +99,7 @@ namespace POC_SQL_DATA_MOCKER
         {
             bool isValid = false;
 
-            if (textBox_Delimiter.ToString().Length>0)
+            if (textBox_Delimiter.Text.ToString().Trim().Length>0)
             {
                 isValid = true;
             }
@@ -113,6 +122,15 @@ namespace POC_SQL_DATA_MOCKER
         private void btn_PickOutFolder_Click(object sender, EventArgs e)
         {
             textBox_OutFileName.Text = folderBrowserDialog1.ToString() + "DataMock.csv";
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            richTextBox1.SelectionColor = Color.Blue;
+            richTextBox1.SelectedText = "Sometext\r\n";
+            richTextBox1.AppendText("Moretext\r\n");
+            richTextBox1.SelectionColor = Color.Red;
+            richTextBox1.AppendText("Next\r\n");
         }
     }
 }
