@@ -9,7 +9,7 @@ column_name { varchar(<param value>) | int}
 	
 <param value> ::= { [0-9] | max }
 
-<string> ::= { [A-Z,a-z].*[0-9,A-Z,a-z,_].* }
+<string> ::= { [A-Z,a-z].{1}[0-9,A-Z,a-z,_].* }
 
 <value> ::= { [0-9].* }
 
