@@ -65,7 +65,7 @@ namespace POC_SQL_DATA_MOCKER
 
             if (textBox_FormatFilePath.Text.ToString().Trim().Length>0)
             {
-                if (File.Exists(textBox_FormatFilePath.ToString()))
+                if (File.Exists(textBox_FormatFilePath.Text.ToString()))
                 {
                     isValid = true;
                 }
@@ -116,12 +116,18 @@ namespace POC_SQL_DATA_MOCKER
 
         private void btn_ReadFormat_Click(object sender, EventArgs e)
         {
-            textBox_FormatFilePath.Text = openFileDialog1.ToString();
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                textBox_FormatFilePath.Text = openFileDialog1.FileName;    
+            }
         }
 
         private void btn_PickOutFolder_Click(object sender, EventArgs e)
         {
-            textBox_OutFileName.Text = folderBrowserDialog1.ToString() + "DataMock.csv";
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                textBox_OutFileName.Text = folderBrowserDialog1.SelectedPath.ToString() + "\\DataMock.csv";
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -131,6 +137,7 @@ namespace POC_SQL_DATA_MOCKER
             richTextBox1.AppendText("Moretext\r\n");
             richTextBox1.SelectionColor = Color.Red;
             richTextBox1.AppendText("Next\r\n");
+
         }
     }
 }
