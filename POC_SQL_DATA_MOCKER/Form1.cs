@@ -110,10 +110,40 @@ namespace POC_SQL_DATA_MOCKER
         {
             if (Interface_Inputs_Are_Valid())
             {
-
+                GenerateMockData();
+            } else
+            {
+                richTextBox1.AppendText("Please fix. (" + DateTime.Now.ToString() + ")\r\n");
             }
         }
 
+        private void GenerateMockData()
+        {
+            string inLine;
+
+            System.IO.StreamReader FF = new System.IO.StreamReader(textBox_FormatFilePath.Text.ToString());
+
+            while ((inLine = FF.ReadLine()) != null)
+            {
+                richTextBox1.SelectionColor = Color.BlueViolet;
+                richTextBox1.AppendText(inLine + "\r\n");
+            }
+            FF.Close();
+        }
+
+        private void WriteMockData()
+        {
+            System.IO.StreamWriter OF = new System.IO.StreamWriter(textBox_OutFileName.Text.ToString());
+
+            long rowCount = 0;
+
+            long.TryParse(textBox_RowsOut.Text.ToString(), out rowCount);
+
+            for (int i=1; i< rowCount;i++)
+            {
+                OF.WriteLine("STUB");
+            }
+        }
         private void btn_ReadFormat_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -132,12 +162,16 @@ namespace POC_SQL_DATA_MOCKER
 
         private void button1_Click(object sender, EventArgs e)
         {
-            richTextBox1.SelectionColor = Color.Blue;
-            richTextBox1.SelectedText = "Sometext\r\n";
-            richTextBox1.AppendText("Moretext\r\n");
-            richTextBox1.SelectionColor = Color.Red;
-            richTextBox1.AppendText("Next\r\n");
+            //richTextBox1.SelectionColor = Color.Blue;
+            //richTextBox1.SelectedText = "Sometext\r\n";
+            //richTextBox1.AppendText("Moretext\r\n");
+            //richTextBox1.SelectionColor = Color.Red;
+            //richTextBox1.AppendText("Next\r\n");
 
+            textBox_Delimiter.Text = "##";
+            textBox_FormatFilePath.Text = "c:\\dev\\datamock\\formatfile.txt";
+            textBox_OutFileName.Text = "c:\\dev\\datamock\\outfile.txt";
+            textBox_RowsOut.Text = "22";
         }
     }
 }
