@@ -131,6 +131,19 @@ namespace POC_SQL_DATA_MOCKER
             FF.Close();
         }
 
+        private void WriteMockData()
+        {
+            System.IO.StreamWriter OF = new System.IO.StreamWriter(textBox_OutFileName.Text.ToString());
+
+            long rowCount = 0;
+
+            long.TryParse(textBox_RowsOut.Text.ToString(), out rowCount);
+
+            for (int i=1; i< rowCount;i++)
+            {
+                OF.WriteLine("STUB");
+            }
+        }
         private void btn_ReadFormat_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
