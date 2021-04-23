@@ -123,12 +123,20 @@ namespace POC_SQL_DATA_MOCKER
 
             System.IO.StreamReader FF = new System.IO.StreamReader(textBox_FormatFilePath.Text.ToString());
 
+            // Read in the format file
             while ((inLine = FF.ReadLine()) != null)
             {
                 richTextBox1.SelectionColor = Color.BlueViolet;
                 richTextBox1.AppendText(inLine + "\r\n");
             }
             FF.Close();
+
+            //process the format to create structure
+
+            //Create mock data
+
+            //Write the mock data
+            WriteMockData();
         }
 
         private void WriteMockData()
