@@ -8,5 +8,14 @@ namespace POC_SQL_DATA_MOCKER
 {
     class DataField
     {
+        public DataField()
+        {
+
+        }
+
+        public DataField(string iFieldType)
+        {
+
+        }
     }
 }
